@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Sei più Peggy o Ciumi?</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: 20px auto; padding: 30px; background-color: #fffdf8; border: 1px solid #ccc; border-radius: 12px; }
+    h1 { text-align: center; font-size: 28px; color: #b96b9f; }
+    .question { margin-bottom: 25px; }
+    button { display: block; margin: 30px auto; padding: 12px 25px; font-size: 18px; background-color: #b96b9f; color: white; border: none; border-radius: 6px; cursor: pointer; }
+    button:hover { background-color: #9d4c86; }
+    .result { margin-top: 40px; font-weight: bold; font-size: 22px; text-align: center; color: #4a4a4a; }
+    .result img { margin-top: 20px; max-width: 300px; border-radius: 10px; }
+  </style>
+</head>
+<body>
+
+  <h1>Sei più Peggy o Ciumi?</h1>
+
+  <form id="quizForm">
+    <!-- Inserisci qui le 10 domande già condivise -->
+    <div class="question">
+      <p>1. Come reagisci di fronte a un'autorità?</p>
+      <label><input type="radio" name="q1" value="peggy"> La rispetto e cerco di comportarmi bene</label><br>
+      <label><input type="radio" name="q1" value="ciumi"> Mi infastidisce e tendo a sfidarla</label>
+    </div>
+    <div class="question">
+      <p>2. A una festa, cosa fai di solito?</p>
+      <label><input type="radio" name="q2" value="peggy"> Parlo con tutti, rido, ballo: energia pura</label><br>
+      <label><input type="radio" name="q2" value="ciumi"> Cerco un angolino tranquillo o parlo con poche persone</label>
+    </div>
+    <div class="question">
+      <p>3. Come descriveresti il tuo modo di amare?</p>
+      <label><input type="radio" name="q3" value="peggy"> Affettuoso, tenero e rassicurante</label><br>
+      <label><input type="radio" name="q3" value="ciumi"> Intenso, passionale e tormentato</label>
+    </div>
+    <div class="question">
+      <p>4. Quando qualcuno ti critica, come reagisci?</p>
+      <label><input type="radio" name="q4" value="peggy"> Cerco di migliorare e non farlo più</label><br>
+      <label><input type="radio" name="q4" value="ciumi"> Mi offendo o divento ancora più testarda</label>
+    </div>
+    <div class="question">
+      <p>5. Il tuo stile di abbigliamento è più...</p>
+      <label><input type="radio" name="q5" value="peggy"> Metti spesso accessori</label><br>
+      <label><input type="radio" name="q5" value="ciumi"> Preferisco stare comoda, less is more</label>
+    </div>
+    <div class="question">
+      <p>6. Quando sei triste, cosa fai?</p>
+      <label><input type="radio" name="q6" value="peggy"> Cerco coccole o parlo con qualcuno</label><br>
+      <label><input type="radio" name="q6" value="ciumi"> Mi chiudo nel mio mondo e mi immergo nella malinconia</label>
+    </div>
+    <div class="question">
+      <p>7. Come ti comporti di fronte alle regole?</p>
+      <label><input type="radio" name="q7" value="peggy"> Le seguo, mi fanno sentire al sicuro</label><br>
+      <label><input type="radio" name="q7" value="ciumi"> Le metto in discussione, anche se mi costano</label>
+    </div>
+    <div class="question">
+      <p>8. Quando ti senti osservata...</p>
+      <label><input type="radio" name="q8" value="peggy"> Mi piace, sorrido e magari faccio un cenno</label><br>
+      <label><input type="radio" name="q8" value="ciumi"> Mi irrigidisco o faccio finta di niente</label>
+    </div>
+    <div class="question">
+      <p>9. Una tua qualità che gli altri notano subito:</p>
+      <label><input type="radio" name="q9" value="peggy"> Sei solare e sempre disponibile</label><br>
+      <label><input type="radio" name="q9" value="ciumi"> Hai un’aura magnetica e misteriosa</label>
+    </div>
+    <div class="question">
+      <p>10. Ti senti più a tuo agio quando...</p>
+      <label><input type="radio" name="q10" value="peggy"> Tutti ti dicono che sei stata brava</label><br>
+      <label><input type="radio" name="q10" value="ciumi"> Riesci a essere autentica, anche se non approvata</label>
+    </div>
+  </form>
+
+  <button type="button" onclick="calculateResult()">Scopri chi sei!</button>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    function calculateResult() {
+      const form = document.getElementById('quizForm');
+      const answers = new FormData(form);
+      let peggy = 0, ciumi = 0;
+
+      for (const val of answers.values()) {
+        if (val === 'peggy') peggy++;
+        else if (val === 'ciumi') ciumi++;
+      }
+
+      const res = document.getElementById('result');
+      if (peggy + ciumi < 10) {
+        res.innerHTML = "<p>⚠️ Rispondi prima a tutte le domande!</p>";
+        return;
+      }
+
+      if (peggy > ciumi) {
+        res.innerHTML = `
+          <p>✨ Sei una <strong>PEGGY</strong>! Brava bambina, coccolosa, solare e con il cuore aperto al mondo.</p>
+          <img src="https://i.imgur.com/Nm5Bhvx.png" alt="Peggy - Cane bianco e nero">
+        `;
+      } else if (ciumi > peggy) {
+        res.innerHTML = `
+          <p>🌙 Sei una <strong>CIUMI</strong>! Ribelle, profonda, misteriosa e guidata dalle emozioni.</p>
+          <img src="https://i.imgur.com/Lf6dZQM.jpg" alt="Ciumi - Lupo grigio">
+        `;
+      } else {
+        res.innerHTML = `
+          <p>⚖️ Mix perfetto tra Peggy e Ciumi!</p>
+          <img src="https://i.imgur.com/31j0eP3.jpg" alt="Equilibrio Peggy e Ciumi">
+        `;
+      }
+    }
+  </script>
+
+</body>
+</html>
